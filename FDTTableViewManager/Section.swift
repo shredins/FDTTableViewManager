@@ -47,12 +47,51 @@ public class Section {
 
 extension Section: Hashable {
 
-    public var hashValue: Int {
-        return id.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
     public static func ==(lhs: Section, rhs: Section) -> Bool {
         return lhs.id == rhs.id
     }
+
+}
+
+public extension Section {
+
+    func addSection(_ build: () -> [TableViewCellItemProtocol]) -> [Section] {
+        let newSection = Section(rows: build())
+        return [self, newSection]
+    }
+
+    static func buildSection(_ build: () -> [TableViewCellItemProtocol]) -> Section {
+        return Section(rows: build())
+    }
+
+    static func buildSection(_ items: TableViewCellItemProtocol...) -> Section {
+        return buildSection {
+            return items
+        }
+    }
+
+}
+
+extension Sequence where Element: Section {
+
+    func addSection(_ build: () -> [TableViewCellItemProtocol]) -> [Section] {
+        guard var array = self as? [Section] else {
+            fatalError("Couldn't build section sequence")
+        }
+        let newSection = Section(rows: build())
+        array.append(newSection)
+        return array
+    }
+
+    func addSection(_ items: TableViewCellItemProtocol...) -> [Section] {
+        return addSection {
+            return items
+        }
+    }
+
 
 }

@@ -30,15 +30,3 @@ public protocol TableViewCellItemProtocol: class {
     func decorate(_ cell: UITableViewCell)
 
 }
-
-public extension Sequence where Element: TableViewCellItemProtocol {
-
-    public func buildSection() -> Section {
-        if let array = self as? [TableViewCellItemProtocol] {
-            return Section(rows: array)
-        } else {
-            return Section(rows: [])
-        }
-    }
-
-}

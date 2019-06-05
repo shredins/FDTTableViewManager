@@ -26,13 +26,25 @@ class ExampleProvider {
     
     /// Loads data to the tableView
     func load() {
-        let newSection = (0...10)
-            .map {
-                ExampleCellItem(text: "Text \($0)")
+        let sections = Section
+            .buildSection {
+                (0...10)
+                    .map {
+                        ExampleCellItem(text: "Text \($0)")
+                }
             }
-            .buildSection()
+            .addSection {
+                [
+                    ExampleCellItem(text: "Section 1 Starts Here")
+                ]
+            }
+            .addSection(
+                ExampleCellItem(text: "Row 0 of Section 1"),
+                ExampleCellItem(text: "Row 1 of Section 1"),
+                ExampleCellItem(text: "The End Of Section 1")
+            )
         
-        tableViewManager.add(sections: [newSection])
+        tableViewManager.add(sections: sections)
     }
     
 }
