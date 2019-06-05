@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 # 1
-s.platform = :ios
+s.platform = :ios, '12.0'
 s.ios.deployment_target = '12.0'
 s.name = "FDTTableViewManager"
 s.summary = "FDTTableViewManager is simple UITableView manager to handle everything in more elegant way"
