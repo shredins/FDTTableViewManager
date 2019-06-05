@@ -52,11 +52,13 @@ class TableViewManagerTests: XCTestCase {
     }
 
     func testAppendingSingleSection() {
-        let newSection = (0...3)
-                .map {
-                    TestTableViewCellItem(text: "Text \($0)")
+        let newSection = Section
+            .buildSection {
+                (0...3)
+                    .map {
+                        TestTableViewCellItem(text: "Text \($0)")
                 }
-                .buildSection()
+            }
 
         tableViewManager.add(animation: .none, sections: [newSection])
         XCTAssertEqual(tableView.numberOfSections, 1, "Should have 1 section")
@@ -64,19 +66,21 @@ class TableViewManagerTests: XCTestCase {
     }
 
     func testAppendingMultipleSection() {
-        let newSection = (0...3)
-                .map {
-                    TestTableViewCellItem(text: "Text \($0)")
+        let sections = Section
+            .buildSection {
+                (0...3)
+                    .map {
+                        TestTableViewCellItem(text: "Text \($0)")
                 }
-                .buildSection()
-
-        let secondNewSection = (0...1)
-                .map {
-                    TestTableViewCellItem(text: "Text \($0)")
+            }
+            .addSection {
+                (0...1)
+                    .map {
+                        TestTableViewCellItem(text: "Text \($0)")
                 }
-                .buildSection()
+            }
 
-        tableViewManager.add(animation: .none, sections: [newSection, secondNewSection])
+        tableViewManager.add(animation: .none, sections: sections)
         XCTAssertEqual(tableView?.numberOfSections, 2, "Should have 2 section")
         XCTAssertEqual(tableView?.numberOfRows(inSection: 0), 4, "Should have 4 rows in section 0")
         XCTAssertEqual(tableView?.numberOfRows(inSection: 1), 2, "Should have 2 rows in section 1")

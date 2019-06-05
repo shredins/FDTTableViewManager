@@ -48,6 +48,27 @@ public class TableViewManager: NSObject {
         return sections[indexPath.section][indexPath.row]
     }
 
+    public func reloadEverything(with sections: [Section]) {
+        sections.forEach { section in
+            section.rows.forEach {
+                register(item: $0)
+            }
+        }
+
+        self.sections = sections
+        tableView?.reloadData()
+    }
+
+    public func reloadEverything(with items: [TableViewCellItemProtocol]) {
+        items.forEach {
+            register(item: $0)
+        }
+
+        let section = Section(rows: items)
+        self.sections = [section]
+        tableView?.reloadData()
+    }
+
     public func reload(animation: UITableView.RowAnimation = .fade, items: [TableViewCellItemProtocol]) {
         guard let tableView = tableView else {
             fatalError("Trying to perform table operation before it being initialized")

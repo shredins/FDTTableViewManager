@@ -44,7 +44,7 @@ class ExampleProvider {
                 ExampleCellItem(text: "The End Of Section 1")
             )
         
-        tableViewManager.add(sections: sections)
+        tableViewManager.reloadEverything(with: sections)
     }
     
 }
