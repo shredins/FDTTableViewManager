@@ -307,20 +307,19 @@ public class TableViewManager: NSObject {
         }
 
         if item.loadedFromNib {
-            let reuseID = item.reuseId
-            self.register(reuseID: reuseID)
+            self.register(id: item.registerId)
         } else if let className = NSClassFromString(item.registerId) {
-            tableView.register(className, forCellReuseIdentifier: item.reuseId)
+            tableView.register(className, forCellReuseIdentifier: item.registerId)
         }
     }
 
     /// Registers cells from xib files
-    func register(reuseID: String) {
-        if let className = NSClassFromString(reuseID) {
+    func register(id: String) {
+        if let className = NSClassFromString(id) {
             let bundle = Bundle(for: className)
-            let nibName = reuseID.components(separatedBy: ".")[1]
+            let nibName = id.components(separatedBy: ".")[1]
             let nib = UINib(nibName: nibName, bundle: bundle)
-            self.tableView?.register(nib, forCellReuseIdentifier: reuseID)
+            self.tableView?.register(nib, forCellReuseIdentifier: id)
         }
     }
 
@@ -348,7 +347,7 @@ extension TableViewManager: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = tableViewItem(for: indexPath)
-        let tableViewCell = tableView.dequeueReusableCell(withIdentifier: item.reuseId, for: indexPath)
+        let tableViewCell = tableView.dequeueReusableCell(withIdentifier: item.registerId, for: indexPath)
 
         item.delegate = self
         item.decorate(tableViewCell)

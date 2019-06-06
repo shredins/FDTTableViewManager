@@ -15,7 +15,6 @@ open class TableViewCellItem<T: UITableViewCell>: TableViewCellItemProtocol {
 
     // MARK: - Get-only Properties
     public let id = UUID().uuidString
-    public let reuseId = String(describing: T.self)
     public let registerId = String(reflecting: T.self)
     
     open var shouldDeselectImmediately: Bool {

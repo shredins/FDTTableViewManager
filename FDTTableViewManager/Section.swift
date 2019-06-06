@@ -76,7 +76,7 @@ public extension Section {
 
 }
 
-extension Sequence where Element: Section {
+public extension Sequence where Element: Section {
 
     func addSection(_ build: () -> [TableViewCellItemProtocol]) -> [Section] {
         guard var array = self as? [Section] else {

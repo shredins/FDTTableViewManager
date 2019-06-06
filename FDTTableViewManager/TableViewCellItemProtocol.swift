@@ -19,7 +19,6 @@ public protocol TableViewCellItemProtocol: class {
 
     // MARK: - Properties
     var id: String { get }
-    var reuseId: String { get }
     var registerId: String { get }
     var height: CGFloat { get }
     var loadedFromNib: Bool { get }
