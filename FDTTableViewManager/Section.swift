@@ -64,6 +64,12 @@ public extension Section {
         return [self, newSection]
     }
 
+    func addSection(_ items: TableViewCellItemProtocol...) -> [Section] {
+        return addSection {
+            return items
+        }
+    }
+
     static func buildSection(_ build: () -> [TableViewCellItemProtocol]) -> Section {
         return Section(rows: build())
     }
