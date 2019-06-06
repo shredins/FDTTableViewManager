@@ -26,7 +26,7 @@ class ExampleTableViewController: UITableViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        provider.setupTableViewManager(tableView: tableView)
+        provider.set(tableView: tableView)
         provider.load()
     }
 

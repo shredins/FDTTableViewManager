@@ -12,6 +12,22 @@ public protocol TableViewManagerDelegate: class {
 
 }
 
+public protocol TableViewManagerOwner: class {
+
+    var manager: TableViewManager { get }
+
+    func set(tableView: UITableView)
+
+}
+
+public extension TableViewManagerOwner {
+
+    func set(tableView: UITableView) {
+        manager.tableView = tableView
+    }
+
+}
+
 public class TableViewManager: NSObject {
 
     // MARK: - Types

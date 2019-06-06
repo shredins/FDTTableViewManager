@@ -8,22 +8,17 @@
 
 import UIKit
 
-class ExampleProvider {
+class ExampleProvider: TableViewManagerOwner {
     
     // MARK: - Properties
-    private let tableViewManager: TableViewManager
+    let manager: TableViewManager
     
     // MARK - Inits
     init(tableViewManager: TableViewManager? = nil) {
-        self.tableViewManager = tableViewManager ?? TableViewManager()
+        self.manager = tableViewManager ?? TableViewManager()
     }
     
-    // MARK: - Public Instance Methods
-    /// Sets tableViewManager's tableView
-    func setupTableViewManager(tableView: UITableView) {
-        tableViewManager.tableView = tableView
-    }
-    
+    // MARK: - Public Instance Methods    
     /// Loads data to the tableView
     func load() {
         let sections = Section
@@ -44,7 +39,7 @@ class ExampleProvider {
                 ExampleCellItem(text: "The End Of Section 1")
             )
         
-        tableViewManager.reloadEverything(with: sections)
+        manager.reloadEverything(with: sections)
     }
     
 }
