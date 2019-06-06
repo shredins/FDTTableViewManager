@@ -21,7 +21,8 @@ s.homepage = "https://github.com/tomaszkorab/FDTTableViewManager"
 
 # 6 - Replace this URL with your own Git URL from "Quick Setup"
 s.source = { :git => "https://github.com/tomaszkorab/FDTTableViewManager.git",
-:tag => "#{s.version}" }
+             :branch => "master",
+             :tag => "#{s.version}" }
 
 # 7
 s.framework = "UIKit"
