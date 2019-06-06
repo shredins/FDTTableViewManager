@@ -30,6 +30,9 @@ open class TableViewCellItem<T: UITableViewCell>: TableViewCellItemProtocol {
         return false
     }
 
+    // MARK: - Inits
+    public init() {}
+
     // MARK: - Public Instance Methods
     /// Empty method used to set layout of specified cell type. Should be overridden instead of using decorate(of cell:)
     open func setLayout(of cell: T) {}
