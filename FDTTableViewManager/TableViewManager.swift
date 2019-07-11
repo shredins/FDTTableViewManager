@@ -330,7 +330,7 @@ public class TableViewManager: NSObject {
     }
 
     /// Registers cells from xib files
-    func register(id: String) {
+    private func register(id: String) {
         if let className = NSClassFromString(id) {
             let bundle = Bundle(for: className)
             let nibName = id.components(separatedBy: ".")[1]
