@@ -247,20 +247,24 @@ public class TableViewManager: NSObject {
 
         var sectionsToRemove: [Int] = []
 
-        sections = newSections
-                .enumerated()
-                .filter { element in
-                    if element.1.isEmpty {
-                        sectionsToRemove.append(element.0)
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-                .map {
-                    $0.1
-                }
         tableView.deleteRows(at: indexPaths, with: animation)
+        for indexPath in indexPaths.sorted(by: {$0.row > $1.row}) {
+            newSections[indexPath.section].rows.remove(at: indexPath.row)
+        }
+
+        sections = newSections
+            .enumerated()
+            .filter { element in
+                if element.1.isEmpty {
+                    sectionsToRemove.append(element.0)
+                    return false
+                } else {
+                    return true
+                }
+            }
+            .map {
+                $0.1
+        }
 
         if !sectionsToRemove.isEmpty {
             let indexSet = IndexSet(sectionsToRemove)
@@ -298,7 +302,6 @@ public class TableViewManager: NSObject {
     private func hasRowToRemove(matching itemToRemove: TableViewCellItemProtocol, sectionsToUpdate: inout [Section]) -> IndexPath? {
         for (section, sectionModel) in sectionsToUpdate.enumerated() {
             if let row = sectionModel.has(item: itemToRemove) {
-                sectionsToUpdate[section].rows.remove(at: row)
                 return IndexPath(row: row, section: section)
             }
         }
