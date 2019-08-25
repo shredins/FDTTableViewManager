@@ -12,6 +12,12 @@ public protocol TableViewManagerDelegate: class {
 
 }
 
+public protocol TableViewManagerScrollViewDelegate: class {
+
+    func tableViewManager(_ manager: TableViewManager, scrollViewDidScroll scrollView: UIScrollView)
+
+}
+
 public protocol TableViewManagerOwner: class {
 
     var manager: TableViewManager { get }
@@ -47,6 +53,7 @@ public class TableViewManager: NSObject {
 
     // MARK: - Weak Properties
     public weak var delegate: TableViewManagerDelegate?
+    public weak var scrollViewDelegate: TableViewManagerScrollViewDelegate?
 
     // MARK: - Observed Properties
     public weak var tableView: UITableView? {
@@ -411,6 +418,10 @@ extension TableViewManager: UITableViewDelegate {
         }
 
         return item.actions()
+    }
+
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollViewDelegate?.tableViewManager(self, scrollViewDidScroll: scrollView)
     }
 
 }
