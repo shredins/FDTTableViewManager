@@ -17,7 +17,7 @@ pod 'FDTTableViewManager'
 
 ## Author
 
-tomaszkorab, t.korab@fivedottwelve.com
+tomaszkorab, tomasz.korab95@gmail.com
 
 ## License
 
