@@ -34,7 +34,7 @@ public extension TableViewManagerOwner {
 
 }
 
-public class TableViewManager: NSObject {
+open class TableViewManager: NSObject {
 
     // MARK: - Types
     public enum RowInsert {
@@ -71,7 +71,7 @@ public class TableViewManager: NSObject {
         return sections[indexPath.section][indexPath.row]
     }
 
-    public func reloadEverything(with sections: [Section]) {
+    open func reloadEverything(with sections: [Section]) {
         sections.forEach { section in
             section.rows.forEach {
                 register(item: $0)
@@ -82,7 +82,7 @@ public class TableViewManager: NSObject {
         tableView?.reloadData()
     }
 
-    public func reloadEverything(with items: [TableViewCellItemProtocol]) {
+    open func reloadEverything(with items: [TableViewCellItemProtocol]) {
         items.forEach {
             register(item: $0)
         }
@@ -92,7 +92,7 @@ public class TableViewManager: NSObject {
         tableView?.reloadData()
     }
 
-    public func reload(animation: UITableView.RowAnimation = .fade, items: [TableViewCellItemProtocol]) {
+    open func reload(animation: UITableView.RowAnimation = .fade, items: [TableViewCellItemProtocol]) {
         guard let tableView = tableView else {
             fatalError("Trying to perform table operation before it being initialized")
         }
@@ -114,7 +114,7 @@ public class TableViewManager: NSObject {
         }
     }
 
-    public func reload(animation: UITableView.RowAnimation = .fade, sections: [Section]) {
+    open func reload(animation: UITableView.RowAnimation = .fade, sections: [Section]) {
         guard let tableView = tableView else {
             fatalError("Trying to perform table operation before it being initialized")
         }
@@ -141,7 +141,7 @@ public class TableViewManager: NSObject {
         }
     }
 
-    public func add(animation: UITableView.RowAnimation = .fade, inserts: [RowInsert]) {
+    open func add(animation: UITableView.RowAnimation = .fade, inserts: [RowInsert]) {
         guard let tableView = tableView else {
             fatalError("Trying to perform table operation before it being initialized")
         }
@@ -185,7 +185,7 @@ public class TableViewManager: NSObject {
         tableView.endUpdates()
     }
 
-    public func add(animation: UITableView.RowAnimation = .fade, inserts: [SectionInsert]) {
+    open func add(animation: UITableView.RowAnimation = .fade, inserts: [SectionInsert]) {
         guard let tableView = tableView else {
             fatalError("Trying to perform table operation before it being initialized")
         }
@@ -222,21 +222,21 @@ public class TableViewManager: NSObject {
         tableView.endUpdates()
     }
 
-    public func add(animation: UITableView.RowAnimation = .fade, items: [TableViewCellItemProtocol]) {
+    open func add(animation: UITableView.RowAnimation = .fade, items: [TableViewCellItemProtocol]) {
         let inserts: [RowInsert] = items.map {
             .append(item: $0)
         }
         add(animation: animation, inserts: inserts)
     }
 
-    public func add(animation: UITableView.RowAnimation = .fade, sections: [Section]) {
+    open func add(animation: UITableView.RowAnimation = .fade, sections: [Section]) {
         let inserts: [SectionInsert] = sections.map {
             .append(section: $0)
         }
         add(animation: animation, inserts: inserts)
     }
 
-    public func delete(animation: UITableView.RowAnimation = .fade, items: [TableViewCellItemProtocol]) {
+    open func delete(animation: UITableView.RowAnimation = .fade, items: [TableViewCellItemProtocol]) {
         guard let tableView = tableView else {
             fatalError("Trying to perform table operation before it being initialized")
         }
@@ -281,7 +281,7 @@ public class TableViewManager: NSObject {
         tableView.endUpdates()
     }
 
-    public func delete(animation: UITableView.RowAnimation = .fade, sections: [Section]) {
+    open func delete(animation: UITableView.RowAnimation = .fade, sections: [Section]) {
         guard let tableView = tableView else {
             fatalError("Trying to perform table operation before it being initialized")
         }
