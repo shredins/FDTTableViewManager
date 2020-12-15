@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class Section {
+open class Section {
 
     // MARK: - Properties
     let id: String = UUID().uuidString
